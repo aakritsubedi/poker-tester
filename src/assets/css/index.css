@@ -15,3 +15,14 @@ code {
 .container { 
   padding: 0 16px;
 }
+
+.help-text {
+  font-size: 14px;
+  margin: 10px 0;
+}
+.success {
+  color: #017201;
+}
+.danger {
+  color: #ff0000;
+}
