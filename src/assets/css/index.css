@@ -26,3 +26,32 @@ code {
 .danger {
   color: #ff0000;
 }
+
+.header{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:20px
+}
+
+.btn{
+  font-size:1.2em;
+  padding:5px 10px;
+  border-radius:7px;
+  color:black;
+  outline:none;
+  border:1px solid black;
+
+}
+
+.btn:active{
+  transform:scale(0.9);
+}
+
+.btn-primary{
+  background-color:#4af14a;
+}
+
+.btn-secondary{
+  background-color:#ff000d;
+}

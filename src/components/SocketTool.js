@@ -74,7 +74,6 @@ const SocketTool = () => {
 
   return (
     <div className="container">
-      <h1>Poker Tester</h1>
       <Select
         value={selectedServer}
         options={servers}
