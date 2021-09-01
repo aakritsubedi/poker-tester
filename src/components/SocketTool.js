@@ -149,13 +149,13 @@ const SocketTool = () => {
           />
         </div>
         <div className="column">
-          <input value={selectedEvent.listener} />
+          <input value={selectedEvent.listener} type="text" className="ml-2 lisner-input" />
         </div>
         <button className="btn" onClick={fireEvent}>
           Send
         </button>
       </div>
-      <div className="my-3">JSON</div>
+      <h4 className="my-3">JSON</h4>
       <div className="row">
         <div className="column request-json-editor">
           <CodeMirror
@@ -174,21 +174,25 @@ const SocketTool = () => {
           />
         </div>
       </div>
-      <br/>
-
-      <div className="my-3">Response</div>
-      <div className="row">
-        <div className="column response-json-editor">
-         <CodeMirror
-            value={JSON.stringify(response,null,2)}
-            options={{
-              mode: 'javascript',
-              theme: 'material',
-              lineNumbers: true
-            }}
-          />
-        </div>
-      </div>
+        {response != "" && (
+          <>
+            <h4 className="my-2">Response</h4>
+            <div className="row my-3">
+              <div className="column response-json-editor">
+               <CodeMirror
+                  value={JSON.stringify(response,null,2)}
+                  options={{
+                    mode: 'javascript',
+                    theme: 'material',
+                    lineNumbers: true
+                  }}
+                  className="my-3"
+                />
+              </div>
+            </div>
+            </>
+        )}
+    
     </div>
   );
 };

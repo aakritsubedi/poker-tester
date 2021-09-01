@@ -66,6 +66,19 @@ code {
 .row {
   display: flex;
 }
+input[type='text'] {
+  width: 100%;
+  font: 15px/24px 'Poppins', sans-serif;
+  padding: 5px;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  outline: none;
+  border: 1px solid #d2d2d2;
+  border-radius: 3px;
+}
+.lisner-input{
+  width: 97% !important;
+}
 .column {
   flex: 1;
 }
