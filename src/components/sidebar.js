@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-const Sidebar=({active})=>{
+import { Link,useLocation } from "react-router-dom";
+const Sidebar=()=>{
     let tabs={
         "connection":{
             text:"Connection",
@@ -26,7 +26,8 @@ const Sidebar=({active})=>{
             active:false
         }
     }
-
+    const location=useLocation();
+    let active=location.pathname.replace("/","");
     tabs[active].active=true;
 
     let tabLinks=[]
