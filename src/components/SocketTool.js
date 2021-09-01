@@ -9,8 +9,6 @@ import 'codemirror/theme/neat.css';
 require('codemirror/mode/css/css');
 require('codemirror/mode/javascript/javascript');
 
-
-
 const SocketTool = () => {
   const [socket, setSocket] = useState("");
   const [selectedServer, setSelectedServer] = useState("");
