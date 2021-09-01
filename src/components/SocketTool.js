@@ -85,6 +85,18 @@ const SocketTool = () => {
       ) : (
         <span className="help-text danger">{isConnected.message}</span>
       )}
+
+      {isConnected.status ? (
+        <div className="status">
+          <div className="dot dot-success"></div>
+          <span>Online</span>
+        </div>
+      ) : (
+        <div className="status">
+          <div className="dot dot-danger"></div>
+          <span>Offline</span>
+        </div>
+      )}
     </div>
   );
 };
