@@ -69,3 +69,27 @@ code {
 .column {
   flex: 1;
 }
+.my-3 {
+  margin: 15px 0px;
+}
+.my-2 {
+  margin: 10px 0px;
+}
+.mr-2 {
+  margin-right: 10px;
+}
+.ml-2 {
+  margin-left: 10px;
+}
+.d-none {
+  display: none;
+}
+
+.request-json-editor{
+  max-height: 150px;
+  overflow: auto;
+}
+.response-json-editor{
+  max-height: 400px; 
+  overflow: auto
+}

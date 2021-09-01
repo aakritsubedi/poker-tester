@@ -3,9 +3,13 @@ import io from "socket.io-client";
 import React, { useEffect, useState } from "react";
 import PokerService from "../services/poker";
 
-import CodeMirror from 'react-codemirror2';
+import { Controlled as CodeMirror } from 'react-codemirror2';
 import 'codemirror/lib/codemirror.css';
-import 'codemirror/theme/material.css';
+import 'codemirror/theme/neat.css';
+require('codemirror/mode/css/css');
+require('codemirror/mode/javascript/javascript');
+
+
 
 const SocketTool = () => {
   const [socket, setSocket] = useState("");
@@ -44,8 +48,7 @@ const SocketTool = () => {
 
   const fireEvent = () => {
     const { event,data } = selectedEvent;
-   
-    socket.emit(event, data);
+    socket.emit(event, JSON.parse(data));
     listenEvent();
   
   };
@@ -152,31 +155,38 @@ const SocketTool = () => {
           Send
         </button>
       </div>
+      <div className="my-3">JSON</div>
       <div className="row">
-        <div className="column">
-          <textarea json-request-body value={selectedEvent.data}></textarea>
+        <div className="column request-json-editor">
           <CodeMirror
-  value='<h1>I ♥ react-codemirror2</h1>'
-  options={{
-    mode: 'javascript',
-    theme: 'material',
-    lineNumbers: true
-  }}
-  onChange={(editor, data, value) => {
-  }}
-/>
-    
+            value={selectedEvent.data}
+            options={{
+              mode: 'javascript',
+              theme: 'material',
+              lineNumbers: true
+            }}
+            onBeforeChange={(editor,data,value)=>{
+              setSelectedEvent({
+                ...selectedEvent,
+                data:value
+              })
+            }}
+          />
         </div>
       </div>
+      <br/>
 
+      <div className="my-3">Response</div>
       <div className="row">
-        <div className="column">
-          <textarea json-response-body></textarea>
-          <div
-          className="json-response-body"
-          class="my-3 border"
-          //style="max-height: 400px; overflow: auto"
-        ></div>
+        <div className="column response-json-editor">
+         <CodeMirror
+            value={JSON.stringify(response,null,2)}
+            options={{
+              mode: 'javascript',
+              theme: 'material',
+              lineNumbers: true
+            }}
+          />
         </div>
       </div>
     </div>
