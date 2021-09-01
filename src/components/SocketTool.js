@@ -1,8 +1,11 @@
 import Select from "react-select";
 import io from "socket.io-client";
 import React, { useEffect, useState } from "react";
-
 import PokerService from "../services/poker";
+
+import CodeMirror from 'react-codemirror2';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
 
 const SocketTool = () => {
   const [socket, setSocket] = useState("");
@@ -35,15 +38,16 @@ const SocketTool = () => {
     const { listener } = selectedEvent;
     socket.on(listener, (data) => {
       setResponse(data);
-
       socket.removeListener(listener);
     });
   };
 
   const fireEvent = () => {
-    const { event, data } = selectedEvent;
-    socket.emit(event, JSON.parse(data));
+    const { event,data } = selectedEvent;
+   
+    socket.emit(event, data);
     listenEvent();
+  
   };
 
   useEffect(() => {
@@ -150,13 +154,29 @@ const SocketTool = () => {
       </div>
       <div className="row">
         <div className="column">
-          <textarea value={selectedEvent.data}></textarea>
+          <textarea json-request-body value={selectedEvent.data}></textarea>
+          <CodeMirror
+  value='<h1>I ♥ react-codemirror2</h1>'
+  options={{
+    mode: 'javascript',
+    theme: 'material',
+    lineNumbers: true
+  }}
+  onChange={(editor, data, value) => {
+  }}
+/>
+    
         </div>
       </div>
 
       <div className="row">
         <div className="column">
-          <textarea value={JSON.stringify(response)}></textarea>
+          <textarea json-response-body></textarea>
+          <div
+          className="json-response-body"
+          class="my-3 border"
+          //style="max-height: 400px; overflow: auto"
+        ></div>
         </div>
       </div>
     </div>
