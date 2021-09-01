@@ -1,8 +1,13 @@
 import Select from "react-select";
 import io from "socket.io-client";
 import React, { useEffect, useState } from "react";
-
 import PokerService from "../services/poker";
+
+import { Controlled as CodeMirror } from 'react-codemirror2';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/neat.css';
+require('codemirror/mode/css/css');
+require('codemirror/mode/javascript/javascript');
 
 const SocketTool = () => {
   const [socket, setSocket] = useState("");
@@ -35,15 +40,15 @@ const SocketTool = () => {
     const { listener } = selectedEvent;
     socket.on(listener, (data) => {
       setResponse(data);
-
       socket.removeListener(listener);
     });
   };
 
   const fireEvent = () => {
-    const { event, data } = selectedEvent;
+    const { event,data } = selectedEvent;
     socket.emit(event, JSON.parse(data));
     listenEvent();
+  
   };
 
   useEffect(() => {
@@ -142,23 +147,50 @@ const SocketTool = () => {
           />
         </div>
         <div className="column">
-          <input value={selectedEvent.listener} />
+          <input value={selectedEvent.listener} type="text" className="ml-2 lisner-input" />
         </div>
         <button className="btn" onClick={fireEvent}>
           Send
         </button>
       </div>
+      <h4 className="my-3">JSON</h4>
       <div className="row">
-        <div className="column">
-          <textarea value={selectedEvent.data}></textarea>
+        <div className="column request-json-editor">
+          <CodeMirror
+            value={selectedEvent.data}
+            options={{
+              mode: 'javascript',
+              theme: 'material',
+              lineNumbers: true
+            }}
+            onBeforeChange={(editor,data,value)=>{
+              setSelectedEvent({
+                ...selectedEvent,
+                data:value
+              })
+            }}
+          />
         </div>
       </div>
-
-      <div className="row">
-        <div className="column">
-          <textarea value={JSON.stringify(response)}></textarea>
-        </div>
-      </div>
+        {response != "" && (
+          <>
+            <h4 className="my-2">Response</h4>
+            <div className="row my-3">
+              <div className="column response-json-editor">
+               <CodeMirror
+                  value={JSON.stringify(response,null,2)}
+                  options={{
+                    mode: 'javascript',
+                    theme: 'material',
+                    lineNumbers: true
+                  }}
+                  className="my-3"
+                />
+              </div>
+            </div>
+            </>
+        )}
+    
     </div>
   );
 };

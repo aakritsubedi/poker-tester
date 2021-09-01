@@ -66,6 +66,43 @@ code {
 .row {
   display: flex;
 }
+input[type='text'] {
+  width: 100%;
+  font: 15px/24px 'Poppins', sans-serif;
+  padding: 5px;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  outline: none;
+  border: 1px solid #d2d2d2;
+  border-radius: 3px;
+}
+.lisner-input{
+  width: 97% !important;
+}
 .column {
   flex: 1;
+}
+.my-3 {
+  margin: 15px 0px;
+}
+.my-2 {
+  margin: 10px 0px;
+}
+.mr-2 {
+  margin-right: 10px;
+}
+.ml-2 {
+  margin-left: 10px;
+}
+.d-none {
+  display: none;
+}
+
+.request-json-editor{
+  max-height: 150px;
+  overflow: auto;
+}
+.response-json-editor{
+  max-height: 400px; 
+  overflow: auto
 }
