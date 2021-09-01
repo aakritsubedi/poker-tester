@@ -46,7 +46,6 @@ const SocketTool = () => {
       const newSocket = getConnection(selectedServer.value);
 
       newSocket.on("connect", () => {
-        console.log("I am  connected to " + selectedServer.value);
         setIsConnected({
           status: true,
           message: `connected to ${selectedServer.value}`,
@@ -70,7 +69,7 @@ const SocketTool = () => {
 
       return () => newSocket.close();
     }
-  }, [selectedServer]);
+  }, [selectedServer, socket]);
 
   return (
     <div className="container">
