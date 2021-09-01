@@ -11,7 +11,7 @@ class PokerService {
     return res.data;
   }
 
-  static async fetchAllServers() {
+  static async fetchServers() {
     const res = await axios.get(
       `${baseUrl}?key=1opV4Kq7oJipVL5hVmVY8ce_mJFJT4qad5cptbTti3w0&gid=489135342`
     );
