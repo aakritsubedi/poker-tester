@@ -11,7 +11,6 @@ const SocketTool = () => {
     status: false,
     message: "trying to connect to server",
   });
-  const [socket, setSocket] = useState();
 
   const changeServer = (selectedServer) => {
     setSelectedServer(selectedServer);
@@ -44,7 +43,7 @@ const SocketTool = () => {
       });
 
       const newSocket = getConnection(selectedServer.value);
-
+ 
       newSocket.on("connect", () => {
         setIsConnected({
           status: true,
@@ -65,11 +64,10 @@ const SocketTool = () => {
           message: `disconnected from ${selectedServer.value}`,
         });
       });
-      setSocket(newSocket);
 
       return () => newSocket.close();
     }
-  }, [selectedServer, socket]);
+  }, [selectedServer]);
 
   return (
     <div className="container">
