@@ -1,21 +1,19 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.container { 
+.container {
   padding: 0 16px;
 }
-
 .help-text {
   font-size: 14px;
   margin: 10px 0;
@@ -27,7 +25,6 @@ code {
 .danger {
   color: #ff0000;
 }
-
 .status {
   display: flex;
 }
@@ -43,31 +40,69 @@ code {
 .dot-danger {
   background-color: #ff0000;
 }
-.header{
-  display:flex;
+.header {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding:20px
+  padding: 20px;
+}
+.btn {
+  font-size: 1.2em;
+  padding: 5px 10px;
+  border-radius: 7px;
+  color: black;
+  outline: none;
+  border: 1px solid black;
+}
+.btn:active {
+  transform: scale(0.9);
+}
+.btn-primary {
+  background-color: #4af14a;
+}
+.btn-secondary {
+  background-color: #ff000d;
+}
+.row {
+  display: flex;
+}
+input[type='text'] {
+  width: 100%;
+  font: 15px/24px 'Poppins', sans-serif;
+  padding: 5px;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  outline: none;
+  border: 1px solid #d2d2d2;
+  border-radius: 3px;
+}
+.lisner-input{
+  width: 97% !important;
+}
+.column {
+  flex: 1;
+}
+.my-3 {
+  margin: 15px 0px;
+}
+.my-2 {
+  margin: 10px 0px;
+}
+.mr-2 {
+  margin-right: 10px;
+}
+.ml-2 {
+  margin-left: 10px;
+}
+.d-none {
+  display: none;
 }
 
-.btn{
-  font-size:1.2em;
-  padding:5px 10px;
-  border-radius:7px;
-  color:black;
-  outline:none;
-  border:1px solid black;
-
+.request-json-editor{
+  max-height: 150px;
+  overflow: auto;
 }
-
-.btn:active{
-  transform:scale(0.9);
-}
-
-.btn-primary{
-  background-color:#4af14a;
-}
-
-.btn-secondary{
-  background-color:#ff000d;
+.response-json-editor{
+  max-height: 400px; 
+  overflow: auto
 }
