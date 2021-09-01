@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 const Sidebar=({active})=>{
     let tabs={
         "connection":{
@@ -13,7 +13,7 @@ const Sidebar=({active})=>{
             to:"/request",
             active:false
         },
-        "auto-test":{
+        "auto":{
             text:"Auto Test",
             logoUrl:"https://fonts.gstatic.com/s/i/materialiconsoutlined/flash_auto/v11/24px.svg",
             to:"/auto",
@@ -32,10 +32,10 @@ const Sidebar=({active})=>{
     let tabLinks=[]
     for(let tab in tabs){
         let tabLink=<div className={"nav-tab "+(tabs[tab].active?"active":"")}>
-            <a className="nav-link" href={tabs[tab].to} >
+            <Link className="nav-link" to={tabs[tab].to} >
             <img className="tab-icon" src={tabs[tab].logoUrl}></img>
             <h4 className="link-text">{tabs[tab].text}</h4>
-            </a>
+            </Link>
         </div>
         tabLinks.push(tabLink);
     }
