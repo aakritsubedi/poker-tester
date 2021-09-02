@@ -13,7 +13,6 @@ const AutoTest=()=>{
   });
   const refs=[];
   let [rows,setRows]=useState([]);
-  let [newSocket,setNewSocket]=useState(null);
   const changeServer = (selectedServer) => {
     setSelectedServer(selectedServer);
   };
@@ -52,7 +51,6 @@ const AutoTest=()=>{
         // setNewSocket(newSocket);
         let rows=autoFire(newSocket);
         setRows(rows);
-        console.log("connected!!");
         setIsConnected({
           status: true,
           message: `connected to ${selectedServer.value}`,
