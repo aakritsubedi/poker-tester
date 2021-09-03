@@ -27,8 +27,10 @@ const AutoTester = () => {
   const listenEvent = async (listener, index) => {
     socket.on(listener, (data) => {
       if (data) {
-        events[index].status = "Success";
-        events[index].response = data;
+        const eventsList = [...events];
+        eventsList[index].response = data;
+        eventsList[index].status = "Success";
+        setEvents(eventsList);
       }
     });
   };
@@ -60,7 +62,7 @@ const AutoTester = () => {
       const allEvents = events.data.map((event) => ({
         ...event,
         response: {},
-        status: event.data ? "Running" : "Insufficient data",
+        status: event.data ? "Waiting..." : "Insufficient data",
       }));
 
       setEvents(allEvents);
@@ -79,7 +81,7 @@ const AutoTester = () => {
         message: `trying to connect to ${selectedServer.value}`,
       });
 
-      const newSocket = getConnection(selectedServer.value);
+      const newSocket = getConnection(selectedServer.value)
 
       newSocket.on("connect", () => {
         setSocket(newSocket);
@@ -102,7 +104,7 @@ const AutoTester = () => {
           message: `disconnected from ${selectedServer.value}`,
         });
       });
-
+      
       return () => newSocket.close();
     }
   }, [selectedServer]);
@@ -153,7 +155,9 @@ const AutoTester = () => {
                 <td>{row.status}</td>
                 <td>
                   <button
-                    onClick={() => fireEvent(row.event, row.data, row.listener, index)}
+                    onClick={() =>
+                      fireEvent(row.event, row.data, row.listener, index)
+                    }
                   >
                     Run
                   </button>
