@@ -30,7 +30,7 @@ const AutoTester = () => {
         const eventsList = [...events];
         eventsList[index].response = data;
         eventsList[index].status = "Success";
-        document.querySelector(".summary").innerHTML = `${events.filter((event) => event.status === "Success").length}/${events.length} successful`;
+        document.querySelector(".success-summary").innerHTML = `${events.filter((event) => event.status === "Success").length}/${events.filter(event=>event.status!=="Insufficient data").length} successful`;
         setEvents(eventsList);
       }
     });
@@ -136,8 +136,11 @@ const AutoTester = () => {
       )}
       <hr />
       <button onClick={triggerAllEvents}>Trigger All</button>
-        <div className="summary">
-        {events.filter((event) => event.status === "Success").length}/{events.length} successful 
+        <div className="success-summary">
+        {events.filter((event) => event.status === "Success").length}/{events.filter(event=>event.status!=="Insufficient data").length} successful 
+        </div>
+        <div className="data-summary">
+          {events.filter((event) => event.status === "Insufficient data").length}/{events.length} have insufficient data.
         </div>
       <table>
         <thead>
