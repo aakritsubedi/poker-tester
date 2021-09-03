@@ -46,23 +46,6 @@ code {
   align-items: center;
   padding: 20px;
 }
-.btn {
-  font-size: 1.2em;
-  padding: 5px 10px;
-  border-radius: 7px;
-  color: black;
-  outline: none;
-  border: 1px solid black;
-}
-.btn:active {
-  transform: scale(0.9);
-}
-.btn-primary {
-  background-color: #4af14a;
-}
-.btn-secondary {
-  background-color: #ff000d;
-}
 .row {
   display: flex;
 }
@@ -105,4 +88,12 @@ input[type='text'] {
 .response-json-editor{
   max-height: 400px; 
   overflow: auto
+}
+.sidebar {
+  height: 100%;
+  background-color: pink;
+  width: 30%;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
