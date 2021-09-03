@@ -30,6 +30,7 @@ const AutoTester = () => {
         const eventsList = [...events];
         eventsList[index].response = data;
         eventsList[index].status = "Success";
+        document.querySelector(".summary").innerHTML = `${events.filter((event) => event.status === "Success").length}/${events.length} successful`;
         setEvents(eventsList);
       }
     });
@@ -135,6 +136,9 @@ const AutoTester = () => {
       )}
       <hr />
       <button onClick={triggerAllEvents}>Trigger All</button>
+        <div className="summary">
+        {events.filter((event) => event.status === "Success").length}/{events.length} successful 
+        </div>
       <table>
         <thead>
           <tr>
