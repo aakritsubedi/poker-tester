@@ -30,7 +30,11 @@ const AutoTester = () => {
         const eventsList = [...events];
         eventsList[index].response = data;
         eventsList[index].status = "Success";
-        document.querySelector(".success-summary").innerHTML = `${events.filter((event) => event.status === "Success").length}/${events.filter(event=>event.status!=="Insufficient data").length} successful`;
+        document.querySelector("#success-summary").innerHTML = `${
+          events.filter((event) => event.status === "Success").length
+        }/${
+          events.filter((event) => event.status !== "Insufficient data").length
+        } successful`;
         setEvents(eventsList);
       }
     });
@@ -82,7 +86,7 @@ const AutoTester = () => {
         message: `trying to connect to ${selectedServer.value}`,
       });
 
-      const newSocket = getConnection(selectedServer.value)
+      const newSocket = getConnection(selectedServer.value);
 
       newSocket.on("connect", () => {
         setSocket(newSocket);
@@ -105,7 +109,7 @@ const AutoTester = () => {
           message: `disconnected from ${selectedServer.value}`,
         });
       });
-      
+
       return () => newSocket.close();
     }
   }, [selectedServer]);
@@ -134,20 +138,35 @@ const AutoTester = () => {
           <span>Offline</span>
         </div>
       )}
-      <hr />
-      <button onClick={triggerAllEvents}>Trigger All</button>
-        <div className="success-summary">
-        {events.filter((event) => event.status === "Success").length}/{events.filter(event=>event.status!=="Insufficient data").length} successful 
-        </div>
-        <div className="data-summary">
-          {events.filter((event) => event.status === "Insufficient data").length}/{events.length} have insufficient data.
-        </div>
-      <table>
+      <br />
+
+      <div className="alert alert-primary clearfix">
+        <span id="success-summary">
+          {events.filter((event) => event.status === "Success").length}/
+          {
+            events.filter((event) => event.status !== "Insufficient data")
+              .length
+          }{" "}
+          successful.
+        </span>
+        <br />
+        {events.filter((event) => event.status === "Insufficient data").length}/
+        {events.length} have insufficient data.
+        <button
+          className="btn btn-success float-right"
+          onClick={triggerAllEvents}
+        >
+          Trigger All
+        </button>
+      </div>
+      <div className="data-summary"></div>
+      <table className="table">
         <thead>
           <tr>
             <th>SN</th>
-            <td>Socket Info</td>
-            <td>Status</td>
+            <th>Socket Info</th>
+            <th>Status</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -161,13 +180,15 @@ const AutoTester = () => {
                 </td>
                 <td>{row.status}</td>
                 <td>
-                  <button
-                    onClick={() =>
-                      fireEvent(row.event, row.data, row.listener, index)
-                    }
-                  >
-                    Run
-                  </button>
+                  {row.data && (
+                    <button
+                      onClick={() =>
+                        fireEvent(row.event, row.data, row.listener, index)
+                      }
+                    >
+                      Run
+                    </button>
+                  )}
                 </td>
               </tr>
             );
