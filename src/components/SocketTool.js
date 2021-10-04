@@ -5,7 +5,7 @@ import PokerService from "../services/poker";
 
 import { Controlled as CodeMirror } from "react-codemirror2";
 import "codemirror/lib/codemirror.css";
-import "codemirror/theme/neat.css";
+import "codemirror/theme/material.css";
 require("codemirror/mode/css/css");
 require("codemirror/mode/javascript/javascript");
 
@@ -23,6 +23,7 @@ const SocketTool = () => {
   });
 
   const [response, setResponse] = useState("");
+  const [edited, setEdited] = useState("");
 
   const changeServer = (selectedServer) => {
     setSelectedServer(selectedServer);
@@ -30,6 +31,8 @@ const SocketTool = () => {
 
   const changeEvent = (selectedEvent) => {
     setSelectedEvent(selectedEvent);
+    setResponse("");
+    setEdited("");
   };
 
   const getConnection = (url) => {
@@ -37,7 +40,7 @@ const SocketTool = () => {
   };
 
   const listenEvent = () => {
-    const { listener } = selectedEvent;
+    const listener  = edited || selectedEvent.listener;
     socket.on(listener, (data) => {
       setResponse(data);
       socket.removeListener(listener);
@@ -147,9 +150,10 @@ const SocketTool = () => {
         </div>
         <div className="column">
           <input
-            value={selectedEvent.listener}
+            value={edited || selectedEvent.listener}
             type="text"
             className="ml-2 lisner-input"
+            onChange={(evt)=>{setEdited(evt.target.value);}}
           />
         </div>
         <button className="btn" onClick={fireEvent}>
@@ -162,7 +166,7 @@ const SocketTool = () => {
           <CodeMirror
             value={selectedEvent.data}
             options={{
-              mode: "javascript",
+              mode: "application/json",
               theme: "material",
               lineNumbers: true,
             }}
@@ -183,7 +187,7 @@ const SocketTool = () => {
               <CodeMirror
                 value={JSON.stringify(response, null, 2)}
                 options={{
-                  mode: "javascript",
+                  mode: "application/json",
                   theme: "material",
                   lineNumbers: true,
                 }}
