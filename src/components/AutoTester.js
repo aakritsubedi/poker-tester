@@ -34,9 +34,9 @@ const AutoTester = () => {
 
   const listenEvent = async (listener, index) => {
     socket.on(listener, (data) => {
-      if (data) {
+      if (data || data === "") {
         const eventsList = [...events];
-        eventsList[index].response = data;
+        eventsList[index].response = data || {};
         eventsList[index].status = "Success";
         document.querySelector("#success-summary").innerHTML = `${
           events.filter((event) => event.status === "Success").length
@@ -124,12 +124,11 @@ const AutoTester = () => {
 
   const viewModal = (event) => {
     setSelectedEvent(event);
-    console.log(selectedEvent);
   };
 
   return (
     <>
-      <div className="container">
+      <div className="container-fluid">
         <Select
           value={selectedServer}
           options={servers}
@@ -264,7 +263,7 @@ const AutoTester = () => {
                 </div>
                 <h3>Response</h3>
                 <CodeMirror
-                  value={JSON.stringify(selectedEvent.response, null, 2)}
+                  value={JSON.stringify(selectedEvent.response || {}, null, 2)}
                   options={{
                     mode: "javascript",
                     theme: "material",

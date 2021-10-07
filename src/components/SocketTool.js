@@ -1,6 +1,7 @@
 import Select from "react-select";
 import io from "socket.io-client";
 import React, { useEffect, useState } from "react";
+
 import PokerService from "../services/poker";
 
 import { Controlled as CodeMirror } from "react-codemirror2";
@@ -45,6 +46,7 @@ const SocketTool = () => {
   };
 
   const fireEvent = () => {
+    setResponse("");
     const { event, data } = selectedEvent;
     socket.emit(event, JSON.parse(data));
     listenEvent();
@@ -111,7 +113,7 @@ const SocketTool = () => {
   }, [selectedServer]);
 
   return (
-    <div className="container">
+    <div className="container-fluid">
       <Select
         value={selectedServer}
         options={servers}
@@ -145,18 +147,19 @@ const SocketTool = () => {
             onChange={changeEvent}
           />
         </div>
-        <div className="column">
+        <div className="column mx-2">
           <input
             value={selectedEvent.listener}
             type="text"
-            className="ml-2 lisner-input"
+            className="form-control"
           />
         </div>
-        <button className="btn" onClick={fireEvent}>
+        <button className="btn btn-primary" onClick={fireEvent}>
           Send
         </button>
       </div>
-      <h4 className="my-3">JSON</h4>
+      <hr />
+      <h4 className="my-4">JSON</h4>
       <div className="row">
         <div className="column request-json-editor">
           <CodeMirror
@@ -177,7 +180,7 @@ const SocketTool = () => {
       </div>
       {response && (
         <>
-          <h4 className="my-2">Response</h4>
+          <h4 className="my-4">Response</h4>
           <div className="row my-3">
             <div className="column response-json-editor">
               <CodeMirror
