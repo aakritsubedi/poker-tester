@@ -84,10 +84,12 @@ input[type='text'] {
 .request-json-editor{
   max-height: 150px;
   overflow: auto;
+  z-index: 0;
 }
 .response-json-editor{
   max-height: 400px; 
-  overflow: auto
+  overflow: auto;
+  z-index: 0;
 }
 .sidebar {
   height: 100%;
