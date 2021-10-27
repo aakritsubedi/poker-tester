@@ -41,7 +41,7 @@ const SocketTool = () => {
   };
 
   const listenEvent = () => {
-    const listener  = edited || selectedEvent.listener;
+    const listener = edited || selectedEvent.listener;
     socket.on(listener, (data) => {
       setResponse(data);
       socket.removeListener(listener);
@@ -129,77 +129,79 @@ const SocketTool = () => {
       )}
 
       {isConnected.status ? (
-        <div className="status">
-          <div className="dot dot-success"></div>
+        <div className="status my-2">
+          <div className="dot dot-success mt-1"></div>
           <span>Online</span>
         </div>
       ) : (
-        <div className="status">
-          <div className="dot dot-danger"></div>
+        <div className="status my-2">
+          <div className="dot dot-danger mt-1"></div>
           <span>Offline</span>
         </div>
       )}
-      <div>
-        <h2>Events</h2>
-      </div>
-      <div className="row">
-        <div className="column">
-          <Select
-            value={selectedEvent}
-            options={events}
-            onChange={changeEvent}
-          />
+      <div className="container-fluid">
+        <div>
+          <h2>Events</h2>
         </div>
-        <div className="column mx-2">
-          <input
-            value={edited || selectedEvent.listener}
-            type="text"
-            className="ml-2 lisner-input"
-            onChange={(evt)=>{setEdited(evt.target.value);}}
-          />
-        </div>
-        <button className="btn btn-primary" onClick={fireEvent}>
-          Send
-        </button>
-      </div>
-      <hr />
-      <h4 className="my-4">JSON</h4>
-      <div className="row">
-        <div className="column request-json-editor">
-          <CodeMirror
-            value={selectedEvent.data}
-            options={{
-              mode: "application/json",
-              theme: "material",
-              lineNumbers: true,
-            }}
-            onBeforeChange={(editor, data, value) => {
-              setSelectedEvent({
-                ...selectedEvent,
-                data: value,
-              });
-            }}
-          />
-        </div>
-      </div>
-      {response && (
-        <>
-          <h4 className="my-4">Response</h4>
-          <div className="row my-3">
-            <div className="column response-json-editor">
-              <CodeMirror
-                value={JSON.stringify(response, null, 2)}
-                options={{
-                  mode: "application/json",
-                  theme: "material",
-                  lineNumbers: true,
-                }}
-                className="my-3"
-              />
-            </div>
+        <div className="row">
+          <div className="column">
+            <Select
+              value={selectedEvent}
+              options={events}
+              onChange={changeEvent}
+            />
           </div>
-        </>
-      )}
+          <div className="column mx-2">
+            <input
+              value={edited || selectedEvent.listener}
+              type="text"
+              className="ml-2 lisner-input"
+              onChange={(evt) => { setEdited(evt.target.value); }}
+            />
+          </div>
+          <button className="btn btn-primary" onClick={fireEvent}>
+            Send
+          </button>
+        </div>
+        <hr />
+        <h4 className="my-4">JSON</h4>
+        <div className="row">
+          <div className="column request-json-editor">
+            <CodeMirror
+              value={selectedEvent.data}
+              options={{
+                mode: "application/json",
+                theme: "material",
+                lineNumbers: true,
+              }}
+              onBeforeChange={(editor, data, value) => {
+                setSelectedEvent({
+                  ...selectedEvent,
+                  data: value,
+                });
+              }}
+            />
+          </div>
+        </div>
+        {response && (
+          <>
+            <h4 className="my-4">Response</h4>
+            <div className="row my-3">
+              <div className="column response-json-editor">
+                <CodeMirror
+                  value={JSON.stringify(response, null, 2)}
+                  options={{
+                    mode: "application/json",
+                    theme: "material",
+                    lineNumbers: true,
+                  }}
+                  className="my-3"
+                />
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
